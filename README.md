@@ -49,3 +49,4 @@
 - Phone switching - `Model.jsx` and `utils/animations.js`
 - Integrating website stats with [Sentry](https://sentry.io/welcome/).
 - Features Section - `Features.jsx`
+- Footer - `Footer.jsx`
