@@ -21,14 +21,14 @@ const Model = () => {
     // The texture of the phone
     img: yellowImg,
   });
+
   // Animate the Heading text
   useGSAP(() => {
     gsap.to("#heading", { opacity: 1, y: 0 });
   }, []);
 
-  // Phone switching sizes
+  // Phone switching sizes & animation
   const tl = gsap.timeline();
-
   useEffect(() => {
     if (size === "large") {
       // Params: timeline, modelRef, model rotation, animate from ID, animate to ID, animation properties.
@@ -71,7 +71,7 @@ const Model = () => {
               groupRef={small}
               gsapType={"view1"}
               controlRef={cameraControlSm}
-              setRotation={smRotate}
+              setRotation={setSmRotate}
               item={model}
               size={size}
             />
@@ -83,7 +83,7 @@ const Model = () => {
               groupRef={large}
               gsapType={"view2"}
               controlRef={cameraControlLg}
-              setRotation={lgRotate}
+              setRotation={setLgRotate}
               item={model}
               size={size}
             />
@@ -101,9 +101,17 @@ const Model = () => {
                 //        - allows to split the canvas into multiple regions, each showing
                 //          a different perspective or scene
                 //        - can edit the properties of space taken (width, height, ...)
+                //        - allows to mix traditional HTML and 3D Scenes.
+                //        - 'View' is an unstyled HTML DOM element (by default a div, and it
+                //           takes the same properties as one)
                 //
                 // <View.Port> - used to connect the <View> components to the Canvas and
                 //               output them.
+                //
+                // NOTE: Using `View`s, It is advisable to re-connect the event system to a parent
+                //       that contains both the CANVAS and the HTML content. ('eventSource' prop)
+                //         - It ensures that both are accessible/selectable and even allows you
+                //           to mount controls or other deeper integrations into your view.
               }
               <View.Port></View.Port>
             </Canvas>

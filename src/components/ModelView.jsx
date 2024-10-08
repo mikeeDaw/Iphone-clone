@@ -17,26 +17,25 @@ const ModelView = ({
   gsapType,
   controlRef,
   camera,
-  setRotationSize,
+  setRotation,
   size,
   item,
 }) => {
   return (
+    // if you put 'absolute' here, it will stack the two <View>s. Same principles
+    // of 2 <divs> with both 'absolute.
     <View
       index={index}
       id={gsapType}
-      className={`border-2 border-red-500 w-full h-full ${
-        index === 2 ? "right-[-100%]" : ""
-      }`}
+      className={`w-full h-full absolute ${index === 2 ? "right-[-100%]" : ""}`}
     >
       <PerspectiveCamera makeDefault position={[0, 0, 4]} />
-      <Html> Lezzgo {index}</Html>
 
       {
         // Lights and the Custom Light
       }
       <Lights />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.2} />
 
       {
         // The Phone Model
@@ -50,7 +49,10 @@ const ModelView = ({
         target={new THREE.Vector3(0, 0, 0)}
         // Event when the interaction finished (user stopped orbiting the 3D Model)
         // 'getAzimuthalAngle' - returns the current horizontal rotation, in radians.
-        onEnd={() => setRotationState(controlRef.current.getAzimuthalAngle())}
+        onEnd={() => {
+          console.log("Azimuth", controlRef.current.getAzimuthalAngle());
+          setRotation(controlRef.current.getAzimuthalAngle());
+        }}
       />
       <group
         ref={groupRef}

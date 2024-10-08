@@ -14,7 +14,7 @@ const Iphone = (props) => {
   const { nodes, materials } = useGLTF("models/scene.glb");
 
   // Change the phone color
-  console.log("mats", materials);
+  //   console.log("mats", materials);
   // Add texture to the screen.
   // Find the mesh to apply it first. see below...
   const texture = useTexture(props.item.img);
